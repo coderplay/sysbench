@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:latest
 
 RUN apt-get update
 
@@ -10,11 +10,11 @@ RUN apt-get -y install libmysqlclient-dev libssl-dev
 # For PostgreSQL support
 RUN apt-get -y install libpq-dev
 
-RUN git clone https://github.com/akopytov/sysbench.git sysbench
+RUN git clone https://github.com/coderplay/sysbench.git sysbench
 
 WORKDIR sysbench
 RUN ./autogen.sh
-RUN ./configure --with-mysql --with-pgsql
+RUN ./configure --with-mysql --with-pgsql --prefix=/usr
 RUN make -j
 RUN make install
 
